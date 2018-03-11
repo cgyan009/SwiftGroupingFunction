@@ -1,67 +1,40 @@
 # Xcode
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
+//: Playground - noun: a place where people can play
 
-## Build generated
-build/
-DerivedData/
+import UIKit
 
-## Various settings
-*.pbxuser
-!default.pbxuser
-*.mode1v3
-!default.mode1v3
-*.mode2v3
-!default.mode2v3
-*.perspectivev3
-!default.perspectivev3
-xcuserdata/
+struct Car {
+    let model: String
+    let make: String
+    let color: String
+    let year: Int
+}
 
-## Other
-*.moved-aside
-*.xccheckout
-*.xcscmblueprint
+let cars = [Car(model: "CRV", make: "Honda", color: "Black", year: 2001),
+            Car(model: "Accord", make: "Honda", color: "Red", year: 2003),
+            Car(model: "530Xi", make: "BMW", color: "Black", year: 2006),
+            Car(model: "318i", make: "BMW", color: "Red", year: 2003),
+            Car(model: "F150", make: "Ford", color: "White", year: 2009),
+            Car(model: "Wrangler", make: "Jeep", color: "Orange", year: 2006),
+            Car(model: "X540i", make: "BMW", color: "White", year: 2001),
+            Car(model: "F250", make: "Ford", color: "Orange", year: 2009)
+]
 
-## Obj-C/Swift specific
-*.hmap
-*.ipa
-*.dSYM.zip
-*.dSYM
+let groupedCars = Dictionary(grouping: cars) { (car) -> String in
+    return car.color
+}
 
-## Playgrounds
-timeline.xctimeline
-playground.xcworkspace
+var finalGroupedCars = [[Car]]()
+let keys = groupedCars.keys.sorted()
+keys.forEach { (key) in
+    finalGroupedCars.append(groupedCars[key]!)
+}
 
-# Swift Package Manager
-#
-# Add this line if you want to avoid checking in source code from Swift Package Manager dependencies.
-# Packages/
-# Package.pins
-.build/
-
-# CocoaPods
-#
-# We recommend against adding the Pods directory to your .gitignore. However
-# you should judge for yourself, the pros and cons are mentioned at:
-# https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
-#
-# Pods/
-
-# Carthage
-#
-# Add this line if you want to avoid checking in source code from Carthage dependencies.
-# Carthage/Checkouts
-
-Carthage/Build
-
-# fastlane
-#
-# It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
-# screenshots whenever they are needed.
-# For more information about the recommended setup visit:
-# https://docs.fastlane.tools/best-practices/source-control/#source-control
-
-fastlane/report.xml
-fastlane/Preview.html
-fastlane/screenshots
-fastlane/test_output
+finalGroupedCars.forEach({
+    print("******************")
+    $0.forEach({
+        print($0)}
+    )}
+)
